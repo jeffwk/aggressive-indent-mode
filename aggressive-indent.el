@@ -311,7 +311,8 @@ If L and R are provided, use them for finding the start and end of defun."
 Like `aggressive-indent-indent-defun', but without errors or
 messages.  L and R passed to `aggressive-indent-indent-defun'."
   (cl-letf (((symbol-function 'message) #'ignore))
-    (ignore-errors (aggressive-indent-indent-defun l r))))
+    (let ((inhibit-message t))
+      (ignore-errors (aggressive-indent-indent-defun l r)))))
 
 ;;; Indenting region
 (defun aggressive-indent--indent-current-balanced-line (column)
@@ -383,7 +384,8 @@ then keep indenting until nothing more happens."
 Like `aggressive-indent-indent-region-and-on', but without errors
 or messages."
   (cl-letf (((symbol-function 'message) #'ignore))
-    (ignore-errors (aggressive-indent-indent-region-and-on l r))))
+    (let ((inhibit-message t))
+      (ignore-errors (aggressive-indent-indent-region-and-on l r)))))
 
 ;;; Tracking changes
 (defvar aggressive-indent--changed-list nil
